@@ -1,0 +1,22 @@
+/* infinitescrolling */
+#infscr-loading {
+    text-align: center;
+    margin:0 auto;
+    background: #000;
+    opacity: 0.7;
+    padding:12px 5px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    max-width: 200px;
+    border-radius: 3px
+}
+@media (max-width: 767px) {
+    #infscr-loading {
+        left: 20px;
+        margin-left: auto;
+        padding: 8px 0;
+        font-size: 12px;
+        width:200px;
+    }
+}

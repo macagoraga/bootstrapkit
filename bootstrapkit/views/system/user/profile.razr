@@ -1,0 +1,59 @@
+<div class="row">
+
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+    <div class="page-header">
+      <h1>@trans('Your Profile')</h1>
+    </div>
+
+    <form action="@url('@system/profile/save')" method="post">
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-user fa-lg fa-fw"></i>
+          </span>
+          <input id="form-name" class="form-control input-lg" type="text" name="user[name]" value="@($user.name)" placeholder="@trans('Name')" required>
+        </div>
+        <span class="help-block">@trans('This is your name')</span>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-envelope fa-lg fa-fw"></i>
+          </span>
+          <input id="form-email" class="form-control input-lg" type="email" name="user[email]" value="@($user.email)" placeholder="@trans('Email')" required>
+        </div>
+        <span class="help-block">@trans('This is your email')</span>
+      </div>
+
+      <div class="form-group">
+        <a class="btn btn-default" data-toggle="collapse" href="#collapse-password-group">@trans('Change password')</a>
+        <div id="collapse-password-group" class="collapse" style="margin-top:15px">
+
+          <div class="form-group">
+            <input id="form-password-old" class="form-control input-lg" type="password" name="user[password_old]" placeholder="@trans('Current Password')" value="" data-toggle="password" data-placement="before" data-iconsize="large" data-message="@trans('Show/hide password')">
+            <span class="help-block">@trans('This is your current password')</span>
+          </div>
+
+          <div class="form-group">
+            <input id="form-password-new" class="form-control input-lg" type="password" name="user[password_new]" placeholder="@trans('New Password')" value="" data-toggle="password" data-placement="before" data-iconsize="large" data-message="@trans('Show/hide password')" data-bk-pwdmeter>
+            <span class="help-block">@trans('This is your new password')</span>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">@trans('Save')</button>
+      </div>
+
+      @token
+
+    </form>
+
+  </div>
+
+</div>

@@ -1,0 +1,56 @@
+<div class="row">
+
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+    <div class="page-header">
+      <h1>@trans('Registration')</h1>
+    </div>
+
+    <form action="@url('@system/registration/register')" method="post">
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-user fa-lg fa-fw"></i>
+          </span>
+          <input id="username" class="form-control input-lg" type="text" name="user[username]" value="" placeholder="@trans('Username')" pattern="[a-zA-Z0-9]{4,150}" required autofocus>
+        </div>
+        <span class="help-block">@trans('This is your username, min 4 characters and can contain letters and numbers.')</span>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-user fa-lg fa-fw"></i>
+          </span>
+          <input id="name" class="form-control input-lg" type="text" name="user[name]" value="" placeholder="@trans('Name')" required>
+        </div>
+        <span class="help-block">@trans('This is your name.')</span>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-envelope fa-lg fa-fw"></i>
+          </span>
+          <input id="email" class="form-control input-lg" type="email" name="user[email]" value="@($user.email)" placeholder="@trans('Email')" required>
+        </div>
+        <span class="help-block">@trans('This is your e-mail, please provide a valid e-mail address.')</span>
+      </div>
+
+      <div class="form-group">
+        <input id="password" class="form-control input-lg" type="password" name="user[password]" placeholder="@trans('Password')" value="" data-toggle="password" data-placement="before" data-iconsize="large" data-message="@trans('Show/hide password')" data-bk-pwdmeter>
+        <span class="help-block">@trans('Choice a safe password, minimum 6 characters with letters and numbers.')</span>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">@trans('Submit')</button>
+      </div>
+
+      @token
+
+    </form>
+
+  </div>
+
+</div>

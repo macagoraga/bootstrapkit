@@ -1,0 +1,66 @@
+@style('sgallerie-site', 'extension://sgallerie/assets/css/simple-gallerie.css')
+
+@if($params['gallerie_plugin'] == 'lb')
+	@script('sgallerie-site', 'extension://sgallerie/assets/js/lightbox.min.js', ['jquery'])
+@elseif($params['gallerie_plugin'] == 'fb')
+	@script('sgallerie-site', 'extension://sgallerie/assets/js/fancybox.min.js', ['jquery'])
+	@script('sgallerie-site-2', 'extension://sgallerie/assets/js/fancybox.buttons.js', ['jquery'])
+	@script('sgallerie-site-3', 'extension://sgallerie/assets/js/fancybox.media.js', ['jquery'])
+@else
+	@script('sgallerie-site', 'extension://sgallerie/assets/js/lightbox.min.js', ['jquery'])
+@endif
+
+<h1 class="page-header">@( $head.title )  <small>(@( $count ))</small></h1>
+
+@if($error == true)
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <p>@( $warning )</p>
+    </div>
+@endif
+
+<div class="panel panel-default">
+    <div class="panel-body">
+    <ul class="sgallerie-wrap">
+        @foreach($images as $image)
+        <li class="col-xs-12 col-md-4">
+            @if($show_title == true)
+             <a class="thumbnail load fancybox" title="@trans("%image%", ["%image%" => $image])" href="storage/sg_media/@trans("%image%", ["%image%" => $image])" rel="group" data-title="@trans("%image%", ["%image%" => $image])" data-lightbox="simple-gallerie">
+            @else
+             <a class="thumbnail load fancybox" href="storage/sg_media/@trans("%image%", ["%image%" => $image])" rel="group" data-lightbox="simple-gallerie">
+            @endif
+                <img class="main_img img-responsive" src="storage/sg_media/@trans("%image%", ["%image%" => $image])" alt ="@trans("%image%", ["%image%" => $image])" />
+             </a>
+            <div class="loader"><img src="extensions/sgallerie/assets/img/loader.gif" /></div>
+        </li>
+        @endforeach
+    </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        $('.main_img').load(function(){
+            $( ".loader" ).fadeOut( "slow" );
+        });
+    });
+</script>
+@if($params['gallerie_plugin'] == 'fb')
+    <script type="text/javascript">
+    $(function() {
+        $(".fancybox").fancybox({
+            prevEffect : 'none',
+            nextEffect : 'none',
+            helpers : {
+                title : {
+                    type: 'outside'
+                },
+                thumbs : {
+                    width : 50,
+                    height : 50
+                }
+            }
+        });
+    });
+</script>
+@endif

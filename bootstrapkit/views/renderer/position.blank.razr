@@ -1,0 +1,3 @@
+@foreach ($value as $widget)
+@raw($widget.render($options))
+@endforeach

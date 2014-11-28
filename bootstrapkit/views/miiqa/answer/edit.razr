@@ -1,0 +1,18 @@
+<h2>@trans('Your answer')</h2>
+
+<form id="js-answer" action="@url('@miiQA/site/answer/save')" method="post">
+
+    <input type="hidden" name="answer[user_id]" value="@($answer.userid)">
+
+    <input type="hidden" name="answer[question_id]" value="@($question.id)">
+
+    <div class="form-group">
+        <textarea placeholder="@trans('Give your answer here')" name="answer[content]" class="form-control input-lg" required></textarea>
+    </div>
+
+    <button class="btn btn-primary">
+        @trans('Submit your answer')
+        <i class="fa fa-spinner fa-spin"></i>
+    </button>
+
+</form>

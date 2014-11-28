@@ -1,0 +1,134 @@
+@script('wall.index', 'theme://bootstrapkit/js/extensions/wall/post/index.js', ['requirejs'])
+
+<div class="row">
+
+    <div class="col-xs-12">
+
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Share something</button>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Share something</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <form action="@url('@wall/site/save')" method="post" data-bk-form-wall-post>
+
+                @if ($app.user.authenticated)
+
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="@trans('Start writing here...')" name="post[content]"></textarea>
+                        <br>
+                        <input type="submit" class="btn btn-primary btn-block" name="submit" value="Share">
+                    </div>
+
+                @else
+
+                    <div class="alert alert-warning">Please login first</div>
+
+                @endif
+
+                    <br>
+                    <input type="hidden" name="post[slug]" value="@( $post.slug ?: 'slug' )">
+                    <br>
+                    <input type="hidden" name="post[title]" value="@( $post.title ?: 'title' )">
+                    <br>
+                    <input type="hidden" name="post[date]" value="@( $post.date ?: '' )">
+                    <br>
+                    <input type="hidden" name="post[user_id]" value="@( $post.user_id ?: 1 )">
+                    <br>
+                    <input type="hidden" name="post[excerpt]" value="@( $post.excerpt ?: '' )">
+                    <br>
+                    <input type="hidden" name="post[status]" value="@( $post.status ?: 2 )">
+                    <br>
+                    <input type="hidden" name="post[comment_status]" value="@( $post.comment_status ?: 1 )">
+                    <br>
+                    <input type="hidden" name="post[comment_count]" value="@( $post.comment_count ?: 0 )">
+
+                    <input type="hidden" name="id" value="@( $post.id ?: 0 )">
+                    @token
+
+                </form>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+    </div>
+
+ </div>
+
+ <hr class="invisible">
+
+<div class="row">
+
+    @foreach ($posts as $post)
+    <article class="col-xs-12 col-md-4">
+
+        <div class="thumbnail">
+
+            <img src="http://placehold.it/350x150" alt="Demo" class="img-responsive">
+
+            <div class="caption">
+
+                <h3><a href="@url('@wall/id', ['id' => $post.id])">@($post.title)</a></h3>
+
+                <p class="bk-article-meta">
+                    @trans('Written by %name% on %date%', ['%name%' => $post.user.name, '%date%' => '<time datetime="'.date($post.date, 'Y-m-d H:i:s').'">'.date($post.date).'</time>' ])
+                </p>
+
+                @if ($post.excerpt)
+                <p>@raw($post.excerpt)</p>
+                @else
+                <p>@raw($post.content)</p>
+                @endif
+
+                <div class="btn-group hide">
+                    @if ($post.readmore || $post.excerpt)
+                    <a class="btn btn-default btn-sm" href="@url('@wall/id', ['id' => $post.id])">@trans('Continue Reading')</a>
+                    @endif
+                    @if ($post.isCommentable || $post.commentCount)
+                    <a class="btn btn-default btn-sm" href="@url('@wall/id#comments', ['id' => $post.id])">@transchoice('{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments', $post.commentCount, ['%num%' => $post.commentCount])</a>
+                    @endif
+                </div>
+
+                @if ($post.isCommentable)
+                @include('extension://wall/views/comment/respond.razr')
+                @else
+                @trans('Comments are closed.')
+                @endif
+
+            </div>
+
+        </div>
+
+    </article>
+    @endforeach
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="pagination-lg">
+            @if($page > 1)
+            <li class="bk-pagination-previous">
+                <a href="@url('@wall/page', ['page' => $page-1])">@trans('Newer posts')</a>
+            </li>
+            @endif
+            @if($page < $total)
+            <li class="bk-pagination-next">
+                <a href="@url('@wall/page', ['page' => $page+1])">@trans('Older posts')</a>
+            </li>
+            @endif
+        </ul>
+    </div>
+</div>

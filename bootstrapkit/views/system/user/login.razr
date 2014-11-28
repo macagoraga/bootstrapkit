@@ -1,0 +1,44 @@
+<div class="row">
+
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+    <div class="page-header">
+      <h1>@trans('Login')</h1>
+    </div>
+
+    <form action="@url('@system/auth/authenticate')" method="post">
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-user fa-lg fa-fw"></i>
+          </span>
+          <input id="form-username" class="form-control input-lg" type="text" name="credentials[username]" value="@($last_username)" placeholder="@trans('Username')" required autofocus>
+        </div>
+        <span class="help-block">@trans('Enter your username.')</span>
+      </div>
+
+      <div class="form-group">
+        <input id="form-password" class="form-control input-lg" type="password" name="credentials[password]" placeholder="@trans('Password')" value="" data-toggle="password" data-placement="before" data-iconsize="large" data-message="@trans('Show/hide password')">
+        <span class="help-block">@trans('Enter your password.') <a href="@url('@system/resetpassword')">@trans('(Forgot Password?)')</a></span>
+      </div>
+
+      <div class="checkbox">
+        <label for="@($remember_me_param)">
+          <input type="checkbox" name="@($remember_me_param)"> @trans('Remember Me')
+        </label>
+	  </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">@trans('Submit')</button>
+      </div>
+
+      <input type="hidden" name="redirect" value="@($redirect)">
+
+      @token
+
+    </form>
+
+  </div>
+
+</div>

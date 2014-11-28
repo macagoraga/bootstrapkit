@@ -1,0 +1,35 @@
+@script('wall.post-comments', 'extension://wall/assets/js/comment/post.js', 'jquery')
+
+@if ($app.user.hasAccess('wall: view comments'))
+
+<div id="comments" class="js-comments bk-margin">
+
+    @if ($post.commentCount)
+    <h3 style="margin-bottom:30px">@trans('Comments (%count%)', ['%count%' => $post.commentCount])</h3>
+
+    <ul class="media-list">
+
+        @foreach ($post.commentsTree(['order' => $params['comments.order']]) as $child)
+        @include('theme://bootstrapkit/views/wall/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
+        @endforeach
+
+    </ul>
+    @endif
+
+    @if ($post.isCommentable)
+    @include('theme://bootstrapkit/views/wall/comment/respond.razr')
+    @else
+    @trans('Comments are closed.')
+    @endif
+
+</div>
+
+@elseif ($app.user.authenticated)
+
+    <p>@trans('You are not allowed to view comments.')</p>
+
+@else
+
+    <p>@trans('Please login to view comments.')</p>
+
+@endif

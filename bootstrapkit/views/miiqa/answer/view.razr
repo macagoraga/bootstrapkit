@@ -1,0 +1,49 @@
+<div class="miiqa-answer @if($answer.voteBest) miiqa-answer-best @endif panel panel-default">
+
+	<div class="panel-body">
+
+        <div class="clearfix">
+
+            <div class="pull-left">
+                <a class="js-answer-vote" href="@url('@miiQA/site/answer/id/vote', ['id' => $answer.id, 'question' => $answer.questionId, 'vote' => true])"><i class="fa fa-chevron-up"></i></a>
+                <span class="vote"> @($answer.vote) </span>
+                <a class="js-answer-vote" href="@url('@miiQA/site/answer/id/vote', ['id' => $answer.id, 'question' => $answer.questionId, 'vote' => false])"><i class="fa fa-chevron-down"></i></a>
+            </div>
+
+            <div class="pull-right uk-text-large">
+
+                @if($question.userId == @(int)$app['user']->getId() && !$answer.voteBest)
+                    <a href="@url('@miiQA/site/answer/id/best', ['id' => $answer.id, 'question' => $question.id])"><i class="fa fa-circle-thin"></i></a>
+                    @elseif($answer.voteBest)
+                    <i class="fa fa-check-circle"></i>
+                @endif
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="clearfix">
+
+            @($answer.content)
+
+            <div class="pull-right uk-text-small">
+
+                <div>@trans( 'Answered' ) @date($answer.date())</div>
+
+                <div class="clearfix">
+                    <div class="js-avatar pull-left" data-email="@($answer.user.email)">
+                        @gravatar($answer.user.email, ['size' => 40, 'attrs' => ['alt' => $answer.user.username, 'class' => 'bk-border-circle']])
+                    </div>
+                    <div class="pull-right">
+                        @($answer.user.username)
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+	</div>
+
+</div>

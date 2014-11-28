@@ -1,0 +1,68 @@
+<div class="js-respond row">
+<div class="col-xs-12">
+
+    <h3>@trans('Leave a comment')</h3>
+
+    @if ($app.user.hasAccess('wall: post comments'))
+
+        <form class="uk-form uk-form-stacked" method="post" action="@url('@wall/site/comment', ['post_id' => $post.id])">
+
+            @if ($app.user.authenticated)
+
+                <p>@trans('Logged in as %name%', ['%name%' => $app.user.name])</p>
+
+            @else
+
+                <p>@trans('Your email address will not be published.')</p>
+
+                @set($req = $params['comments.require_name_and_email'])
+
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user fa-fw"></i>
+                    </span>
+                    <input id="form-name" class="form-control" type="text" name="comment[author]" placeholder="@trans('Name')"@( $req ? ' required' : '')>
+                  </div>
+                  <span class="help-block">@trans('This is your name.')</span>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-envelope fa-fw"></i>
+                    </span>
+                    <input id="form-email" class="form-control" type="email" name="comment[email]" placeholder="@trans('Email')"@($req ? ' required' : '')>
+                  </div>
+                  <span class="help-block">@trans('This is your email.')</span>
+                </div>
+
+            @endif
+
+            <div class="form-group">
+              <textarea placeholder="@trans('Comment')" id="form-comment" class="form-control" name="comment[content]" required></textarea>
+            </div>
+
+            <p>
+                <input class="btn btn-primary" type="submit" value="@trans('Submit comment')" accesskey="s">
+                <a class="js-cancel-reply" href="#">@trans('Cancel')</a>
+            </p>
+
+            <input type="hidden" name="comment[parent_id]" value="0">
+
+            @token
+
+        </form>
+
+    @elseif ($app.user.authenticated)
+
+        <p>@trans('You are not allowed to post comments.')</p>
+
+    @else
+
+        <p>@trans('Please login to leave a comment.')</p>
+
+    @endif
+
+</div>
+</div>

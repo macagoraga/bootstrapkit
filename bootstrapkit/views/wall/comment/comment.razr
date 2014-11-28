@@ -1,0 +1,40 @@
+@set($maxlevel = $params['comments.max_depth'] <= $node->getDepth())
+<li class="media" id="comment-@( $comment.id )">
+
+  <a class="pull-left" href="#">
+    @gravatar($comment.email, ['size' => 100, 'attrs' => ['width' => '50', 'height' => '50', 'alt' => $comment.author, 'class' => 'media-object']])
+  </a>
+
+  <div class="media-body" data-comment="@( $comment.id )">
+
+    <h4 class="media-heading">@( $comment.author )</h4>
+
+    <p>@raw( $comment.content )</p>
+
+    <small>
+    <a href="@url('@wall/id', ['id' => $comment.postId])#comment-@( $comment.id )">
+    <time datetime="date($comment.created, 'Y-m-d H:i:s')">@trans('%date% at %time%', ['%date%' => date($comment.created), '%time%' => date($comment.created, 'H:i:s')])</time>
+    </a>
+    </small>
+
+    @if ($post.commentStatus && !$maxlevel)
+    <p><a class="btn btn-default btn-xs js-reply" href="#"><i class="uk-icon-reply"></i> @trans('Reply')</a></p>
+    @endif
+
+    @if ($node.hasChildren() && !$maxlevel)
+    <ul class="media-list">
+        @foreach ($node.children as $child)
+        @include('theme://bootstrapkit/views/wall/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
+        @endforeach
+    </ul>
+    @endif
+
+  </div>
+
+</li>
+
+@if ($node.hasChildren() && $maxlevel)
+    @foreach ($node.children as $child)
+    @include('theme://bootstrapkit/views/wall/comment/comment.razr', ['node' => $child, 'comment' => $child.comment])
+    @endforeach
+@endif

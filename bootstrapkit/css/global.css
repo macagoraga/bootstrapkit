@@ -1,0 +1,55 @@
+/* Global CSS
+-------------------------------------------------- */
+
+body > #main {
+    padding: 80px 15px 0;
+}
+
+#footer p {
+    margin: 20px 0;
+}
+
+#footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+/* Cursor pointer because used for toggle .panel-body */
+.panel .panel-heading
+{
+    cursor:pointer;
+}
+
+/* Only for device width < 768px */
+@media (max-width: 767px) {
+
+    /* Default hide panel body when mobile, show onClick via js */
+    aside .panel .panel-body
+    {
+        display: none;
+    }
+}
+
+
+/* fix text wrap */
+.thumbnail .caption {
+    word-wrap: break-word;
+}
+
+
+/* sgallerie */
+.sgallerie-wrap {
+    padding: 0
+}
+.sgallerie-wrap li {
+list-style: none
+}
+.sgallerie-wrap li .img-responsive, 
+.sgallerie-wrap li .thumbnail > img, 
+.sgallerie-wrap li .thumbnail a > img {
+    display: block;
+    height: auto;
+    max-height: 200px;
+    max-width: 100%;
+}

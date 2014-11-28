@@ -1,0 +1,11 @@
+<article class="bk-article">
+
+    <h1 class="page-header">@( $post.title )</h1>
+
+    <div>@raw( $post.content )</div>
+
+    @if ($post.isCommentable || $post.commentCount)
+    @include('extension://wall/views/comment/comments.razr')
+    @endif
+
+</article>

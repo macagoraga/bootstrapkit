@@ -1,0 +1,23 @@
+@script('posts-edit', 'extension://wall/assets/js/post/edit.js', 'requirejs')
+<div class="row">
+
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+    <div class="page-header">
+      <h1>@trans('Say hello to everyone')</h1>
+    </div>
+
+    <form action="@url('@wall/post/save')" method="post">
+
+        <div class="form-group">
+            <textarea class="form-control" placeholder="@trans('Start writing here...')" name="post[content]"></textarea>
+            <br>
+            <input type="submit" class="btn btn-primary btn-block" name="submit" value="Share">
+        </div>
+
+        @token
+    </form>
+
+    </div>
+
+</div>

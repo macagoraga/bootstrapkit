@@ -1,0 +1,11 @@
+
+/* icheck */
+.icheckbox.checkbox {
+    padding-left: 0
+}
+
+/* fix icheckbox label padding-left on bootstrap */
+.icheckbox.radio label
+, .icheckbox.checkbox label{
+    padding-left:0
+}

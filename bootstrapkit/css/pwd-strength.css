@@ -1,0 +1,15 @@
+
+/* password strength */
+#pwd-container .error-list{
+    padding-left:0
+}
+#pwd-container .error-list li {
+    list-style:none
+}
+#pwd-container .error-list li span {
+    /*color:inherit !important;*/
+    color: #a94442 !important;
+}
+.pwstrength_viewport_progress {
+    display:none
+}

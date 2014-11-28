@@ -1,0 +1,34 @@
+/* Override for other bootstrap theme */
+
+/* JOURNAL */
+.bt-journal .uavatar-img {
+    top:16px
+}
+.bt-journal .uavatar-dd-toggle{
+    line-height: 22px;
+}
+
+/* YETI */
+.bt-yeti .uavatar-img {
+    top:7px
+}
+
+/* PAPER */
+.bt-paper .uavatar-img {
+    top:17px
+}
+
+/* TODC */
+.bt-todc .uavatar-img {
+    right: 15px;
+    top: 0;
+}
+
+@media screen and (max-width: 768px) {
+
+    /* PAPER */
+    .bt-paper .uavatar-img {
+        top:7px
+    }
+
+}

@@ -1,0 +1,39 @@
+/*
+    Add missing 5th columns for bootstrap
+    <div class="row">
+        <div class="col-md-5th col-xs-6">
+        ...
+        </div>
+    </div>
+*/
+.col-xs-5th,
+.col-sm-5th,
+.col-md-5th,
+.col-lg-5th {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.col-xs-5th {
+    width: 20%;
+    float: left;
+}
+@media (min-width: 768px) {
+    .col-sm-5th {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-5th {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-5th {
+        width: 20%;
+        float: left;
+    }
+}

@@ -1,0 +1,8 @@
+<article class="bk-article">
+
+    @if ($page.get('title', true))
+    <h1 class="page-header">@($page.title)</h1>
+    @endif
+
+    @raw($page.content)
+</article>

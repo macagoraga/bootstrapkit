@@ -1,0 +1,31 @@
+<div class="row">
+
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+    <div class="page-header">
+      <h1>@trans('Password confirmation')</h1>
+    </div>
+
+    <form action="@url('@system/resetpassword/confirm', ['user' => $username, 'key' => $activation])" method="post">
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-lock fa-lg fa-fw"></i>
+          </span>
+          <input id="form-password" class="form-control input-lg" type="password" name="password" placeholder="@trans('Current Password')" value="">
+        </div>
+        <span class="help-block">@trans('Enter your new password below.')</span>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">@trans('Submit')</button>
+      </div>
+
+      @token
+
+    </form>
+
+  </div>
+
+</div>

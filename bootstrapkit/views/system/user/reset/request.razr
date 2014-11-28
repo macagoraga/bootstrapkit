@@ -1,0 +1,31 @@
+<div class="row">
+
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+    <div class="page-header">
+      <h1>@trans('Forgot password')</h1>
+    </div>
+
+    <form action="@url('@system/resetpassword/reset')" method="post">
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-envelope fa-lg fa-fw"></i>
+          </span>
+          <input id="form-email" class="form-control input-lg" type="email" name="email" value="" placeholder="@trans('Email')" required autofocus>
+        </div>
+        <span class="help-block">@trans('Please enter your email address. You will receive a link to create a new password via email.')</span>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">@trans('Submit')</button>
+      </div>
+
+      @token
+
+    </form>
+
+  </div>
+
+</div>

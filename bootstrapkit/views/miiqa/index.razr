@@ -1,0 +1,89 @@
+@script('bootstrapkit.miiqa-question-index', 'theme://bootstrapkit/js/extensions/miiqa/question-index.js', ['requirejs'])
+
+<section id="miiQA-index" class="">
+
+<h1 class="page-header">Questions &amp; Answers</h1>
+
+    <form class="hidden">
+        <input type="text" name="filter[search]" placeholder="@trans( 'Search...' )" value="@($filter['search'])" class="form-control input-lg typeahead">
+    </form>
+
+    <hr class="invisible">
+
+    <form>
+
+        <div class="panel panel-default">
+
+            <div class="panel-body">
+
+                <div id="questions-filters" class="pull-left">
+                    <div class="btn-group">
+
+                        @set($query = ['filter' => $filter])
+                        @set($current = !(array_key_exists('status', $filter)))
+
+                        @set($query = array_merge($query, ['filter' => array_merge($filter, ['status' => ''])]))
+                        <a data-status="" class="btn btn-default active @( $current ? 'active' : '')" href="@url( '@miiQA/site', $query )">@trans('All')</a>
+
+                        @set( $current = (array_key_exists('status', $filter) && $filter['status'] == constant('STATUS_OPEN', $question)))
+                        @set( $query = array_merge( $query, [ 'filter' => array_merge( $filter, ['status' => constant('STATUS_OPEN', $question)])]))
+                        <a data-status="@($query['filter']['status'])" class="btn btn-default @( $current ? 'active' : '')" href="@url( '@miiQA/site', $query )">@trans('Open')</a>
+
+                        @set( $current = (array_key_exists('status', $filter) && $filter['status'] == constant('STATUS_ANSWERED', $question)) )
+                        @set( $query = array_merge( $query, [ 'filter' => array_merge( $filter, ['status' => constant('STATUS_ANSWERED', $question)])]))
+                        <a data-status="@($query['filter']['status'])" class="btn btn-default @( $current ? 'active' : '')" href="@url( '@miiQA/site', $query )">@trans('Answered')</a>
+
+                        @set( $current = (array_key_exists('status', $filter) && $filter['status'] == constant('STATUS_RESOLVED', $question)) )
+                        @set( $query = array_merge( $query, [ 'filter' => array_merge( $filter, ['status' => constant('STATUS_RESOLVED', $question)])]))
+                        <a data-status="@($query['filter']['status'])" class="btn btn-default @( $current ? 'active' : '')" href="@url( '@miiQA/site', $query )">@trans('Resolved')</a>
+
+                    </div>
+                    <i class="fa fa-spinner fa-spin js-spinner hidden"></i>
+                </div>
+
+
+                <div id="questions-orders" class="pull-left hidden">
+                    <div class="btn-group">
+                        <?php
+                            $query = ['filter' => $filter];
+                            $current = (!array_key_exists('orderby', $filter) || (array_key_exists('orderby', $filter) && $filter['orderby'] == 'view_count'));
+                            $query['filter']['orderby'] = 'view_count';
+                        ?>
+                        <a data-orderby="view_count" class="btn btn-@( $current ? 'primary active' : 'default')" href="@url( '@miiQA/site', $query )">@trans( 'View' )</a>
+                        
+                        <?php
+                            $current = (array_key_exists('orderby', $filter) && $filter['orderby'] == 'comment_count');
+                            $query['filter']['orderby'] = 'comment_count';
+                        ?>
+                        <a data-orderby="comment_count" class="btn btn-@( $current ? 'primary active' : 'default')" href="@url( '@miiQA/site', $query )">@trans( 'Answer' )</a>
+                        
+                        <?php
+                            $current = (array_key_exists('orderby', $filter) && $filter['orderby'] == 'vote');
+                            $query['filter']['orderby'] = 'vote';
+                        ?>
+                        <a data-orderby="vote" class="btn btn-@( $current ? 'primary active' : 'default')" href="@url( '@miiQA/site', $query )">@trans( 'Vote' )</a>
+                    </div>
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+
+                <div class="pull-right">
+                    <a href="@url( '@miiQA/site/question/add' )" class="btn btn-success" type="button">@trans( 'Ask a question' )</a>
+                </div>
+
+            </div>
+
+        </div>
+            
+        <input type="hidden" name="page" value="0">
+
+    </form>
+
+    <hr class="invisible">
+
+    <div id="questions-table">
+        @include('extension://miiqa/views/question/table.razr')
+    </div>
+
+    <ul class="pagination @( $total < 2 ? 'hidden' : '' )" data-uk-pagination="{ pages: @( $total ) }"></ul>
+
+</section>

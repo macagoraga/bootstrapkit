@@ -1,0 +1,34 @@
+/*
+
+<li class="dropdown">
+  <a href="javascript:;" data-toggle="dropdown" class="uavatar-dd-toggle">
+     hi, username <img class="uavatar-img" src="" alt="" height="30" width="30"/>
+  </a>
+  <ul class="dropdown-menu">
+    <li>
+      <a href="">
+          <i class="fa fa-icon"></i> Link
+      </a>
+    </li>
+  </ul>
+</li>
+
+*/
+/* navbar user avatar */
+.uavatar-dd-toggle {
+    padding-right:50px !important
+}
+
+.uavatar-img {
+    position:absolute;
+    right: 10px;
+    top:10px
+}
+@media screen and (max-width: 768px) {
+
+    .uavatar-img {
+        top: 5px;
+        right:5px
+    }
+
+}

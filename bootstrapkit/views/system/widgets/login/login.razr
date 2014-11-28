@@ -1,0 +1,38 @@
+<form class="uk-form" action="@url('@system/auth/authenticate')" method="post">
+
+    <div class="form-group">
+
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input class="form-control" type="text" name="credentials[username]" value="@($last_username)" placeholder="@trans('username')" required autofocus>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" type="password" name="credentials[password]" value="" placeholder="@trans('password')" data-toggle="password" data-placement="before" data-message="@trans('Show/hide password')" required>
+    </div>
+
+    <div class="form-group">
+        <input class="btn btn-primary btn-block" type="submit" value="@trans('Login')">
+    </div>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="@($remember_me_param)"> @trans('Remember Me')
+        </label>
+        <br>
+        <a href="@url('@system/resetpassword')">@trans('Forgot Password?')</a>
+
+        @if ($app.option.get('system:user.registration', 'admin') != 'admin')
+        <br>
+        <a href="@url('@system/registration')">@trans('Sign up')</a>
+        @endif
+    </div>
+
+    <input type="hidden" name="redirect" value="@($redirect)">
+    @token
+
+</form>

@@ -1,0 +1,73 @@
+@script('bootstrapkit.miiqa-question-view', 'theme://bootstrapkit/js/extensions/miiqa-question-view.js', ['requirejs'])
+
+<article class="miiqa-question bk-article">
+
+    <h1 class="page-header">
+        @($question.title)
+        <a class="js-question-vote" href="@url('@miiQA/site/question/id/vote', ['id' => $question.id, 'vote' => true])">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+        <span class="vote"> @($question.vote) </span>
+        <a class="js-question-vote" href="@url('@miiQA/site/question/id/vote', ['id' => $question.id, 'vote' => false])">
+            <i class="fa fa-chevron-down"></i>
+        </a>
+    </h1>
+
+	<div class="clearfix">
+
+		@($question.content)
+
+		<div class="pull-right">
+
+			<div>@trans( 'Answered' ) @date($question.date)</div>
+
+			<div class="clearfix">
+
+				<div class="js-avatar pull-left" data-email="@($question.user.email)">
+					@gravatar(@($question.user.email), ['size' => 40, 'attrs' => ['alt' => @($question.user.username), 'class' => 'uk-border-circle']])
+				</div>
+
+				<div class="pull-right">
+					@(@($question.user.username))
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</article>
+
+<hr>
+
+<div class="clearfix">
+
+	<div id="js-answers-filter" class="pull-right">
+
+		<i class="fa fa-spinner fa-spin js-spinner hidden"></i>
+
+		<div class="btn-group">
+
+            <a 	class="btn btn-default @( (!$filter['orderby'] || ($filter['orderby'] == 'date' && $filter['order'] == 'desc')) ? 'active' : '')"
+                    href="@url( '@miiQA/site/question/id', ['id' => $question.id, 'filter[orderby]' => 'date', 'filter[order]' => 'desc'] )">@trans('Active')</a>
+
+            <a 	class="btn btn-default @( $filter['orderby'] == 'date' && $filter['order'] == 'asc' ? 'active' : '')"
+                    href="@url( '@miiQA/site/question/id', ['id' => $question.id, 'filter[orderby]' => 'date', 'filter[order]' => 'asc'] )">@trans('Oldest')</a>
+
+            <a 	class="btn btn-default @( ($filter['orderby'] == 'vote') ? 'active' : '')"
+                    href="@url( '@miiQA/site/question/id', ['id' => $question.id, 'filter[orderby]' => 'vote'] )">@trans('Votes')</a>
+
+		</div>
+	</div>
+
+    <div id="js-answers-table">
+        @include('extension://miiqa/views/answer/table.razr', compact('answers', 'question'))
+    </div>
+
+</div>
+
+
+@include('extension://miiqa/views/answer/edit.razr')
+
+<hr class="invisible">

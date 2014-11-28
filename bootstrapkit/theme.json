@@ -1,0 +1,15 @@
+{
+    "name": "bootstrapkit",
+    "version": "0.0.2",
+    "type": "theme",
+    "title": "Bootstrapkit",
+    "description": "Twitter Bootstrap CSS Framework for Pagekit",
+    "license": "http://macagoraga.com/terms",
+    "authors": [
+      {
+        "name": "Damir Grgic",
+        "email": "info@macagoraga.com",
+        "homepage": "http://macagoraga.com"
+      }
+    ]
+}

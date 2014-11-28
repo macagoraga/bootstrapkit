@@ -1,0 +1,3 @@
+@style('sgallerie-site', 'extension://sgallerie/assets/css/simple-gallerie.css')
+
+<img class="img-responsive" src="storage/sg_media/@( $widget.content )" alt="@( $widget.content )" />

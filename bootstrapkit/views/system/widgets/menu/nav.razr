@@ -1,0 +1,28 @@
+@if ($root.depth == 0)
+<ul class="dropdown-menu @(!$classes ? '' : '')@($options.classes ? ' ' . $options.classes : '')">
+@endif
+
+@foreach ($root.children as $item)
+
+    @set($header = $item.url == '!header')
+    @set($divider = $item.url == '!divider')
+
+    <li class="@(($item.attribute('parent') ? 'parent dropdown-submenu' : '') . ($item.attribute('active') ? ' active' : '') . ($header ? ' dropdown-header' : '') . ($divider ? ' divider' : ''))">
+
+        @if ($header)
+        @($item)
+        @elseif (!$divider)
+        <a href="@url($item.url)"@($item.attribute('parent') ? ' data-toggle=dropdown' : '')>@($item.name)</a>
+        @endif
+        @if ($item.hasChildren && ($item.attribute('active') || $widget.get('mode', 'all') == 'all' || !$root.depth == 0))
+        <ul class="dropdown-menu">
+            @include('theme://bootstrapkit/views/system/widgets/menu/nav.razr', ['root' => $item])
+        </ul>
+        @endif
+    </li>
+
+@endforeach
+
+@if ($root.depth == 0)
+</ul>
+@endif

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @section('head')
+    @style('bootstrap', 'theme://bootstrapkit/css/bootstrap/default/css/bootstrap.min.css')
+    @style('font-awesome', 'theme://bootstrapkit/css/font-awesome/css/font-awesome.min.css')
+    @style('bootstrapkit', 'theme://bootstrapkit/css/main.css')
+    @script('bootstrapkit', 'theme://bootstrapkit/js/main.js', ['requirejs'])
+  </head>
+  <body>
+
+    <!-- Fixed navbar -->
+    @if (hasSection('navbar'))
+    <header class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bootstrapkit</a>
+        </div>
+        <nav class="collapse navbar-collapse">
+          @section('navbar', ['renderer' => 'navbar'])
+        </nav><!--/.nav-collapse -->
+      </div>
+    </header>
+    @endif
+
+    <!-- Begin page content -->
+    <div class="container" id="main">
+
+        @section('messages')
+
+        <div class="row">
+
+            <section class="@( $theme.classes.columns.main['class'] )">
+                @section('content')
+            </section>
+
+            @if (hasSection('sidebar-a'))
+            <aside class="@( $theme.classes.columns['sidebar-a']['class'] )">
+                @section('sidebar-a', ['renderer' => 'panel'])
+            </aside>
+            @endif
+
+            @if (hasSection('sidebar-b'))
+            <aside class="@( $theme.classes.columns['sidebar-b']['class'] )">
+                @section('sidebar-b', ['renderer' => 'panel'])
+            </aside>
+            @endif
+
+        </div>
+
+    </div>
+
+    <!-- Begin footer -->
+    <footer id="footer">
+      <div class="container">
+        @section('footer')
+      </div>
+    </footer>
+
+  </body>
+</html>
